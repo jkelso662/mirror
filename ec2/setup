@@ -1,0 +1,25 @@
+# Install and clone git repo
+sudo yum install git
+git clone https://github.com/jkelso662/mirror.git
+
+# Install AWS cli
+curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip
+unzip awscliv2.zip
+sudo ./aws/install
+rm *.zip
+
+# Install inotify-tools for s3sync.sh
+sudo amazon-linux-extras install epel -y
+sudo yum update
+sudo yum install inotify-tools
+
+# Setup mirror dirs and dependencies
+cd mirror/
+mkdir output/
+mkdir output/clone/
+mkdir output/crawl/
+mkdir output/search/
+mkdir output/snippets/
+python3 -m setup.py
+
+echo "Remember to export your dev vars"

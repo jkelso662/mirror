@@ -1,8 +1,33 @@
 # mirror - Tools for software project analysis
 
+## Innovation TODOs
+* Move repo to private team repo
+* Add unit and integration tests
+* Updated readmes
+* Extend search.py to run `./graphql.gql` query
+
+**NOTE:** Commands the github-analytics project are interested in are as follows. 
+Currently they don't do anything without a languages file provided.
+Thererfore these commands won't do any searching.
+`python -m mirror.cli search -t $GITHUB_TOKEN -d "output/search/"`
+`python -m mirror.cli search -t $GITHUB_TOKEN -s ">500" -d "output/search/"`
+
+
+Remember to create the following folder structure where you can store your created data!
+```commandline
+output
+├── clone
+├── crawl
+├── search
+│    ├── newRepos.json
+│    ├── newRepos2.json
+│    └── newRepos3.json
+└── snippets
+```
+
 ## Setup
 - Prepare python environment and install package
-- For development please use `pip install -r requirements.dev.txt`
+- For development please use `python setup.py install`
 - Copy `sample.env` to `dev.env`, fill it with required variables and source it
 ```bash
 export GITHUB_TOKEN="<your GitHub token>"

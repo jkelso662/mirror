@@ -1,0 +1,91 @@
+# https://docs.github.com/en/graphql/overview/explorer
+
+query getNewReposAfterCursor($lastcursor: String) {
+  search(query: ">2021-01-01", type: REPOSITORY, first: 100, after: $lastcursor) {
+    repositoryCount
+    edges {
+      cursor
+      node {
+        ... on Repository {
+          id
+          name
+          description
+          shortDescriptionHTML
+          primaryLanguage {
+            name
+          }
+          languages(first: 10, orderBy: {
+            field: SIZE,
+          	direction: DESC
+          }) {
+            totalCount
+            edges {
+              size
+              node {
+                name
+              }
+            }
+          }
+          stargazers {
+            totalCount
+          }
+          forkCount
+          updatedAt
+          createdAt
+        }
+      }
+    }
+  }
+  rateLimit {
+    limit     # Your maximum budget. Your budget is reset to this every hour.
+    cost      # The cost of this query.
+    remaining # How much of your API budget remains.
+    resetAt   # The time (in UTC epoch seconds) when your budget will reset.
+  }
+}
+
+#{"lastcursor": "Y3Vyc29yOjIwMw=="}
+
+query getNewRepos {
+  search(query: ">2021-01-01", type: REPOSITORY, first: 100) {
+    repositoryCount
+    edges {
+      cursor
+      node {
+        ... on Repository {
+          id
+          name
+          description
+          shortDescriptionHTML
+          primaryLanguage {
+            name
+          }
+          languages(first: 10, orderBy: {
+            field: SIZE,
+          	direction: DESC
+          }) {
+            totalCount
+            edges {
+              size
+              node {
+                name
+              }
+            }
+          }
+          stargazers {
+            totalCount
+          }
+          forkCount
+          updatedAt
+          createdAt
+        }
+      }
+    }
+  }
+  rateLimit {
+    limit     # Your maximum budget. Your budget is reset to this every hour.
+    cost      # The cost of this query.
+    remaining # How much of your API budget remains.
+    resetAt   # The time (in UTC epoch seconds) when your budget will reset.
+  }
+}
