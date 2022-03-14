@@ -46,7 +46,8 @@ setup(
         "tqdm",
     ],
     extras_require={
-        "dev": ["black", "mypy", "jupyter"]
+        "dev": ["black", "mypy", "jupyter"],
+        "tests": ["pytest"]
     },
     entry_points={"console_scripts": ["{0} = {0}.cli:cli".format(MODULE_NAME)]},
 )
