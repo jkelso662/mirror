@@ -1,0 +1,21 @@
+FIRST CRAWL
+
+3000 records = 5MB - 8MB (per 20sec)
+1000 records ~ 2MB (~per 7sec)
+1 record = 2KB
+
+2022/01/XX repo id = 450,000,000
+2020/09/30 repo id = 300,000,000
+             total = 150,000,000 = 300GB
+
+                      50,000,000 = 100GB (100hours = 4days)
+
+
+DASHBOARD
+* Discovery query pulls info about either all or select repos
+* Over time analysis needs only reduced queries for metrics on list gathered
+
+
+MIRROR
+* Need to use search command so that we can limit to a date range
+* Need to move query to graphQL so that we conserve rate limit and memory

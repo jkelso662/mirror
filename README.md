@@ -11,6 +11,7 @@ Currently they don't do anything without a languages file provided.
 Thererfore these commands won't do any searching.
 `python -m mirror.cli search -t $GITHUB_TOKEN -d "output/search/"`
 `python -m mirror.cli search -t $GITHUB_TOKEN -s ">500" -d "output/search/"`
+`python -m mirror.cli search -t $GITHUB_TOKEN -s "created:2021-01-01..2022-01-01" -d "../output/search/" -f "../docs/languages.json"`
 
 
 Remember to create the following folder structure where you can store your created data!

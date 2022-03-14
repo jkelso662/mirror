@@ -259,6 +259,8 @@ dmypy.json
 .mirror/
 .secrets/
 simiotics_mirror.egg-info
+.DS_Store
+.idea/
 
 # Env
 dev.env

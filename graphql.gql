@@ -2,7 +2,6 @@
 
 query getNewReposAfterCursor($lastcursor: String) {
   search(query: ">2021-01-01", type: REPOSITORY, first: 100, after: $lastcursor) {
-    repositoryCount
     edges {
       cursor
       node {
@@ -88,4 +87,19 @@ query getNewRepos {
     remaining # How much of your API budget remains.
     resetAt   # The time (in UTC epoch seconds) when your budget will reset.
   }
+}
+
+query repoCount($query: String) {
+  search(query: $query, type: REPOSITORY, first: 5) {
+    repositoryCount
+  }
+  rateLimit {
+    limit     # Your maximum budget. Your budget is reset to this every hour.
+    cost      # The cost of this query.
+    remaining # How much of your API budget remains.
+    resetAt   # The time (in UTC epoch seconds) when your budget will reset.
+  }
+}
+variables {
+  "query": "created:2021-01-01..2022-01-01"
 }

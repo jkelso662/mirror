@@ -105,6 +105,7 @@ def write_repos(data, alredy_parsed, date, files_counter, path, language, search
 @click.option(
     "--languages-file", "-f", help="Path to json file with languages for extracting."
 )
+@click.option('--test', is_flag=True, help="Don't run the query.")
 def popular_repos(
     languages: tuple,
     stars_expression: str,
@@ -112,6 +113,7 @@ def popular_repos(
     token: Optional[str],
     min_rate_limit: int,
     languages_file: str,
+    test: bool,
 ):
     """
     Crawl via search api.
@@ -193,28 +195,31 @@ def popular_repos(
 
                     search_url = f"https://api.github.com/search/repositories?q={search_expresion}&per_page=100&page={page}"
 
-                    search_response = request_with_limit(
-                        search_url, headers, min_rate_limit
-                    )
+                    if test:
+                        print(search_url)
+                    else:
+                        search_response = request_with_limit(
+                            search_url, headers, min_rate_limit
+                        )
 
-                    data = json.loads(search_response.text)
+                        data = json.loads(search_response.text)
 
-                    if not data.get("items"):
-                        break
+                        if not data.get("items"):
+                            break
 
-                    files_counter += 1
+                        files_counter += 1
 
-                    write_repos(
-                        data,
-                        alredy_parsed,
-                        search_response.headers.get(DATETIME_HEADER),
-                        files_counter,
-                        crawldir,
-                        language,
-                        search_url,
-                    )
+                        write_repos(
+                            data,
+                            alredy_parsed,
+                            search_response.headers.get(DATETIME_HEADER),
+                            files_counter,
+                            crawldir,
+                            language,
+                            search_url,
+                        )
 
-                    page += 1
+                        page += 1
             except KeyboardInterrupt:
                 raise KeyboardInterrupt("CTRL+C")
             except:

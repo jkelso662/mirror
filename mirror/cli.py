@@ -8,8 +8,7 @@ from .github.commits import commits
 from .github.search import popular_repos
 from .github.clone_repos import clone_repos
 from .github.generate_snippets import generate_datasets
-from .github.sync import handler as sync_populator
-from .github.licenses import licenses_handler as licenses_populator
+from .github.graphql import crawl_handler as graphql_populator
 
 
 @click.group()
@@ -31,6 +30,7 @@ mirror.add_command(popular_repos, name="search")
 mirror.add_command(clone_repos, name="clone")
 mirror.add_command(generate_datasets, name="generate_snippets")
 mirror.add_command(commits, name="commits")
+mirror.add_command(graphql_populator, name="graphql")
 
 cli = click.CommandCollection(sources=[mirror])
 
